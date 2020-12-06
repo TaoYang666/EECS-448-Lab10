@@ -1,0 +1,36 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Exercise 6: ViewUserPosts</title>
+    </head>    
+    <body>
+        <center>
+            <form action="ViewUserPosts.php" method="POST" id="userform">
+                <label for="id">Please choose user:</label>
+                <select name="id" id="id">
+                    <?php
+                        
+                        $mysqli = new mysqli("mysql.eecs.ku.edu", "taoyang", "Xa3Eeh3n", "taoyang");
+                        if ($mysqli->connect_error) 
+                        {
+                            printf("Connect failed: %s\n", $mysqli->connect_error);
+                            exit();
+                        }
+                        $query="SELECT user_id from Users";
+                        $result=$mysqli->query($query);
+                        
+                            while ($row = $result->fetch_assoc())
+                            {
+                                echo "<option value ='" . $row["user_id"] . "'>" . $row["user_id"] . "</option>";
+                            }
+                            
+                        
+                        $mysqli->close();
+                    ?>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </center>
+    </body>
+</html>
